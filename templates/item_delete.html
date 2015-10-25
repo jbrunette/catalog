@@ -1,0 +1,34 @@
+<br>
+<center>
+	<table class='index_table'>
+	  <tr class='index_table_headers'>
+	    <td>
+	      <span class='back'><a href='{{ url_for('item', category_name=category.name, item_name=item.name) }}'>&lt;&lt; Back</a></span>
+	      {% if category %}
+	         - <span class='category'>{{ category.name }} -
+ 			   {% if item %}
+ 			     Delete Item
+ 			   {% endif %}
+	         </span>
+	      {% endif %}
+	    </td>
+	  <tr>
+	    <td>
+          <form action='{{ url_for('deleteItem', category_name=category.name, item_name=item.name) }}' method="post"> 
+		      {% if category %}
+		        {% if item %}
+		          Are you sure you want to delete '{{ item.name }}' from category '{{ category.name}}'?<br><br>
+		          <input name='submit' type='submit' value='Yes'> 
+		          <a href='{{ url_for('item', category_name=category.name, item_name=item.name) }}'>No</a>
+		        {% else %}
+			        <span class='error'>Item not found</span>
+			    {% endif %}
+
+		      {% else %}
+		        <span class='error'>Category not found</span>
+		      {% endif %}
+		  </form>
+	    </td>
+	  </tr>
+	</table>
+</center>

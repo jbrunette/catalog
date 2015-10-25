@@ -1,0 +1,68 @@
+<br>
+<center>
+	<table class='index_table'>
+	  <tr class='index_table_headers'>
+	    <td>
+	      <span class='back'><a href='{{ url_for('category', category_name=category.name) }}'>&lt;&lt; Back</a></span>
+	      {% if category %}
+	         - <span class='category'>{{ category.name }} -
+ 			   {% if item %}
+ 			     Edit Item
+ 			   {% else %}
+ 			     Add item
+ 			   {% endif %}
+	         </span>
+	      {% endif %}
+	    </td>
+	  <tr>
+	    <td>
+	      {% if category %}
+	      <form action='{% if item_name %}{{ url_for('editItem', category_name=category.name, item_name=item_name) }}{% else %}{{ url_for('addItem', category_name=category.name) }}{% endif %}' method='post'>
+	        <input type='hidden' name='item_id' value='{% if item %}{{ item.id }}{% endif %}'>
+		      <table class='item_editor'>
+		        <tr>
+		          <td class='label'>
+		            Name
+		          </td>
+		          <td>
+		            <input name='name' value='{% if item %}{{ item.name }}{% elif item_name %}{{ item_name }}{% endif %}'>
+		          </td>
+		        </tr>
+		        <tr>
+		          <td class='label'>
+		            Category
+		          </td>
+		          <td>
+		            <select name='category'>
+		              <option value=''>-= Choose =-</option>
+		              {% for cat in categories %}
+		                <option value='{{ cat.name }}' {% if (item and item.category_id == cat.id) or (category.id == cat.id) %} selected {% endif %}>{{ cat.name }}</option>
+		              {% endfor %}
+		            </select>
+		          </td>
+		        </tr>
+		        <tr>
+		          <td class='label'>
+		            Description
+		          </td>
+		          <td>
+		            <textarea name='desc'>{% if item %}{{ item.desc }}{% endif %}</textarea>
+		          </td>
+		        </tr>
+		        <tr>
+		          <td colspan=2>
+		            <input name='submit' type='submit' value='{% if item %}Save{% else %}Add{% endif %}'>
+		            <a href='{% if item %}{{ url_for('item', category_name=category.name, item_name=item.name) }}{% else %}{{ url_for('category', category_name=category.name) }}{% endif %}'>Cancel</a>
+		          </td>
+		        </tr>
+		      </table>
+		    </form>
+
+	      {% else %}
+	        <span class='error'>Category not found</span>
+	      {% endif %}
+
+	    </td>
+	  </tr>
+	</table>
+</center>

@@ -1,0 +1,66 @@
+body {
+	font-family: Verdana;
+	background-color: lightgrey;
+}
+
+.title_bar {
+	background-color: lightblue;
+	width: 100%;
+	font-weight: bold;
+}
+
+.title_bar .login, .logout {
+	cursor: pointer;
+	background-color: orange;
+	color: white;
+	padding: 5px;
+}
+
+.title_bar .login:hover, .logout:hover {
+	text-decoration: underline;
+}
+
+table.index_table {
+	width: 50%;
+	border: 1px solid black;
+	padding: 10px;
+	background-color: white;
+}
+
+.index_table_headers {
+	font-size: 20pt;
+	font-weight: bold;
+	color: darkblue;
+}
+
+.category {
+	font-weight: bold;
+	color: brown;
+}
+
+.item {
+	font-weight: bold;
+	color: brown;
+}
+
+.item_cat {
+	color: grey;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.error {
+	color: red;
+	font-weight: bold;
+}
+
+.item_editor .label {
+	text-align: right;
+	font-weight: bold;
+}
+
+ul.flashes {
+	border: 1px solid blue;
+	background-color: white;
+	padding: 10px 30px;
+}

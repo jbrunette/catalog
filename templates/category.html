@@ -1,0 +1,31 @@
+<br>
+<center>
+	<table class='index_table'>
+	  <tr class='index_table_headers'>
+	    <td>
+	      <span class='back'><a href='javascript:history.go(-1)'>&lt;&lt; Back</a></span>
+	      {% if category %}
+	         - <span class='category'>{{ category.name }}</span>
+	      {% endif %}
+	    </td>
+	  <tr>
+	    <td>
+	      {% if category %}
+		      {% for item in items %}
+		        <div class='item'><a href='{{ url_for('item', category_name=category.name, item_name=item.name) }}'>{{ item.name }}</a></div>
+		      {% endfor %}
+	      {% else %}
+	        <span class='error'>Category not found</span>
+	      {% endif %}
+	    </td>
+	  </tr>
+	  {% if email and category %}
+	    <tr>
+	      <td>
+	        <br>
+	        <a href='{{ url_for('addItem', category_name=category.name) }}'>Add game...</a>
+	      </td>
+	    </tr>
+	  {% endif %}
+	</table>
+</center>

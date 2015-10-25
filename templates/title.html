@@ -1,0 +1,36 @@
+<table class='title_bar'>
+  <tr>
+    <td>
+      <a href='/catalog'>Catalog</a>
+    </td>
+    <td>
+    {% if email %}
+      <span>Welcome, {{ email }}! (<span class='logout'>Logout</span>)</span>
+    {% else %}
+      <span class='login'>Login</span>
+    {% endif %}
+    </td>
+  </tr>
+</table>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class='flashes'>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<script type='text/javascript'>
+  
+  // Handle login click
+  $(".title_bar .login").click(function() {
+    window.open("/gauth", "", "height=500, width=400");
+  });
+  // Handle logout click
+  $(".title_bar .logout").click(function() {
+    location.href = "/logout";
+  });
+</script>
