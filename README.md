@@ -1,12 +1,16 @@
 Linux Server Configuration
 Linux - Apache - Flask - Postgresql
 
-
+Server information
+===========================================================
+IP: 52.33.66.244
+SSH port: 2200
+App URL: http://ec2-52-33-66-244.us-west-2.compute.amazonaws.com/catalog/
 
 Update system with latest packages
 ===========================================================
-apt-get update
-apt-get upgrade
+- "apt-get update"
+- "apt-get upgrade"
 
 SSH port change
 ===========================================================
@@ -26,6 +30,60 @@ Firewall configuration
 - "ufw allow ntp"
 - "ufw enable"
 
+Change server timezone to UTC
+===========================================================
+Run package configuration script for tzdata
+  - "dpkg-reconfigure tzdata"
+  - Choose "None of the above"
+  - Choose "UTC"
+
+Apache installation/configuration
+===========================================================
+Install Apache
+  - "apt-get install apache2"
+
+Install wsgi support
+  - "apt-get install libapache2-mod-wsgi-py3"
+
+Disable default site
+  - "a2dissite 000-default"
+
+Create application site
+  - "nano /etc/apache2/sites-enabled/catalog.conf"
+  - Enable site
+    - "a2ensite catalog"
+
+Postgresql installation/configuration
+===========================================================
+Install Postgresql
+  - "apt-get install postgresql postgresql-contrib"
+
+Update config file
+  - "nano /etc/postgresql/9.3/main/postgresql.conf"
+    - Set "listen_addresses" to "localhost"
+  - Restart postgresql
+    - "service postgresql restart"
+
+Add "catalog" user to postgresql
+  - "postgres createuser catalog"
+  - Set password
+    - "postgres psql"
+    - "\password catalog"
+    - Enter password
+
+Git installation
+===========================================================
+Install Git
+  - "apt-get install git"
+
+Catalog application setup
+===========================================================
+Install python modules
+  - "apt-get install python-pip"
+  - "pip install flask"
+  - "pip install sqlalchemy"
+  - "pip install oauth2client"
+
 "grader" user setup
 ===========================================================
 Add user "grader" to system
@@ -44,5 +102,5 @@ Set up SSH access for grader
   - Add SSH private key to file
   - Change permissions
     - "chmod 700 /home/grader/.ssh"
-    - "chmod 600 .ssh/authorized_keys"
+    - "chmod 600 /home/grader/.ssh/authorized_keys"
 
