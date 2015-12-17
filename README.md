@@ -53,6 +53,9 @@ Create application site
   - Enable site
     - "a2ensite catalog"
 
+Restart Apache
+  - "service apache2 restart"
+
 Postgresql installation/configuration
 ===========================================================
 Install Postgresql
