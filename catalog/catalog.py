@@ -392,7 +392,7 @@ def gauth():
     
     # Create OAUTH2 flow
     #   - Redirects back here to provide us with the authentication code that we would then turn into credentials
-    flow = flow_from_clientsecrets('client_secrets.json', scope='openid email', redirect_uri=flask.url_for('gauth', _external=True))
+    flow = flow_from_clientsecrets('/var/www/catalog/catalog/client_secrets.json', scope='openid email', redirect_uri=flask.url_for('gauth', _external=True))
     if 'code' not in flask.request.args:
         auth_uri = flow.step1_get_authorize_url()
         return flask.redirect(auth_uri)
