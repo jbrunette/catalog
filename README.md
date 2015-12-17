@@ -48,14 +48,6 @@ Install wsgi support
 Disable default site
   - "a2dissite 000-default"
 
-Create application site
-  - "nano /etc/apache2/sites-enabled/catalog.conf"
-  - Enable site
-    - "a2ensite catalog"
-
-Restart Apache
-  - "service apache2 restart"
-
 Postgresql installation/configuration
 ===========================================================
 Install Postgresql
@@ -86,6 +78,19 @@ Install python modules
   - "pip install flask"
   - "pip install sqlalchemy"
   - "pip install oauth2client"
+
+Install site from GIT
+  - "mkdir /var/www/catalog"
+  - "cd /var/www/catalog"
+  - "git clone https://github.com/jbrunette/catalog"
+
+Create Apache application site
+  - "nano /etc/apache2/sites-enabled/catalog.conf"
+  - Enable site
+    - "a2ensite catalog"
+
+Restart Apache
+  - "service apache2 restart"
 
 "grader" user setup
 ===========================================================
