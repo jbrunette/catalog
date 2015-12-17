@@ -86,6 +86,26 @@ Install site from GIT
 
 Create Apache application site
   - "nano /etc/apache2/sites-enabled/catalog.conf"
+  - Add to file:
+
+    <VirtualHost *:80>
+        ServerName mywebsite.com
+        ServerAdmin admin@mywebsite.com
+        WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+        <Directory /var/www/catalog/catalog/>
+                Order allow,deny
+                Allow from all
+        </Directory>
+        Alias /static /var/www/catalog/catalog/static
+        <Directory /var/www/catalog/catalog/static/>
+                Order allow,deny
+                Allow from all
+        </Directory>
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        LogLevel warn
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+	</VirtualHost>
+	
   - Enable site
     - "a2ensite catalog"
 
